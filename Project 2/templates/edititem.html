@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+{% include "header.html" %}
+<!-- body tag already open -->
+
+<div class="container_body">
+<div class="columnE">
+
+			<form action="#" method = "post">
+				<div class="form-group">
+
+					<label for="name">Name:</label>
+					<input type ="text" maxlength="100" class="form-control" name="name" value="{{item.name }}" required>
+
+					<label for="description">Description:</label>
+					<textarea class="form-control" maxlength="250" rows="2" name="description" required>{{item.description}}</textarea>
+
+					<button type="submit" class="btn" id="submit" type="submit">
+					Save</button>
+
+					<button class="btn btn-default delete">
+					<a href = '{{url_for('showCategories')}}'> Cancel</button>
+					</a>
+				</div>
+			</form>
+
+
+</div>
+</div>
+
+{% include "footer.html" %}

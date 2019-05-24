@@ -1,0 +1,33 @@
+<head>
+<title>Catalog APP</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- get the required files from google -->
+  <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+  <!-- stylesheet -->
+  <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+
+
+  <div class="header">
+    <div class="container_header">
+      <div class="columnA">
+        <a href='{{url_for('showCategories')}}'>Catalog APP</a>
+      </div>
+      <div class="columnB">
+
+        {% if login_session %}
+          <span class='description'>
+          <img class="avatar" src={{login_session.picture}}></img>
+          {{login_session.email}} |
+          <a href='{{url_for('disconnect')}}'>logout</a>
+          </span>
+        {% else %}
+          <a href='{{url_for('showLogin')}}'>Login</a>
+        {% endif %}
+
+      </div>
+    </div>
+  </div>

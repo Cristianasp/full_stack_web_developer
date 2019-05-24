@@ -1,0 +1,142 @@
+<style>
+
+* {
+  font-family: 'Roboto', sans-serif;
+  font-size: 12px;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    background-color: #e6e2d3;
+}
+
+ul, ol {
+    list-style: none;
+    align="left"
+}
+
+li{
+  list-style: none;
+  display: block;
+  padding: 2px 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:link {
+    color: teal;
+}
+
+a:visited {
+    color: blue;
+}
+
+input[type=text] , textarea, select {
+    width: 100%;
+    padding: 5px 5px;
+    margin: 4px 0px;
+    border: 1px solid #8842d5;
+    border-radius: 5px;
+}
+
+.header {
+  background-color:#c4b7a6;
+  height: 60px;
+  text-align: left;
+}
+
+.container_header {
+  margin: 0 auto;
+  max-width: 940px;
+  height: 60px;
+  display: flex;
+}
+
+.container_body {
+  margin: 0 auto;
+  max-width: 940px;
+  padding: 0 10px;
+  background-color: #e6e2d3;
+  display: flex;
+}
+
+.columnA {
+  flex: 30%;
+  font-size: 24px;
+  height: 60px;
+  padding: 15px 10px;
+  text-align: left;
+}
+
+.columnB {
+  flex: 70%;
+  font-size: 16px;
+  height: 60px;
+  padding: 15px 0;
+}
+
+.columnC {
+  flex: 30%;
+  padding: 10px 10px;
+}
+
+.columnD {
+  flex: 70%;
+  padding: 10px 10px;
+}
+
+.columnE {
+  flex: 100%;
+  padding: 15px 10px;
+}
+
+.btn {
+  color: #fff;
+  background: #881491;
+  padding: 10px 15px;
+  text-decoration: none;
+  transition: background .5s;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  font-size: 16px;
+}
+
+.btn:hover, .nav ul li:hover {
+  background: #117bff;
+  cursor: pointer;
+  transition: background .5s;
+}
+
+.avatar{
+  width: 40px;
+  height: 40px;
+  border-radius: 20p;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  vertical-align: middle;
+}
+
+.usuario{
+  font-family: 'Roboto', sans-serif;
+  font-size: 10px;
+  line-height: 12px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  text-transform: uppercase;
+}
+
+.name{
+  font-family: 'Roboto', sans-serif;
+  font-size: 20px;
+}
+
+.description{
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+}
+
+</style>

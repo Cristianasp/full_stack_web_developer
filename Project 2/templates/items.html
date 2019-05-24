@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+{% include "header.html" %}
+<!-- body tag already open -->
+
+<div class="container_body">
+
+	 <div class="columnC">
+      CATEGORIES
+  		{% for c in categories%}
+  		<span class = 'name'>
+				<p> <a href='{{url_for('showItems',category_name = c.name)}}'>{{c.name}}</a></p>
+			</span>
+  		{% endfor %}
+		</div>
+
+		<div class="columnD">
+
+      {% if login_session %}
+      <span class='description'>
+				  <a href='{{url_for('newItem')}}'><p>Add new Item</a></p>
+			</span>
+      {% endif %}
+
+			LATEST ITEMS
+			{% for i in items%}
+  		<span class = 'name'>
+				<p>	<a href='{{url_for('showItem', category_name=i.cname, item_name = i.iname)}}'>{{i.iname}}</a> ({{i.cname}})</p>
+			</span>
+  		{% endfor %}
+		</div>
+  </div>
+
+{% include "footer.html" %}

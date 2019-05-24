@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+{% include "header.html" %}
+<!-- body tag already open -->
+
+<div class="container_body">
+
+   	 <div class="columnC">
+      <span class = 'name'> CATEGORIES </span>
+  		{% for c in categories%}
+  		<span class = 'name'>
+				<p> <a href='{{url_for('showItems',category_name = c.name)}}'>{{c.name}}</a>  </p>
+			</span>
+  		{% endfor %}
+    </div>
+
+    	<div class="columnD">
+			<span class = 'name'>  {{category.name}}</span>
+      <p>
+			{% for i in items%}
+  		<span class = 'name'>
+        <a href='{{url_for('showItem',category_name = category.name, item_name = i.name)}}'>{{i.name}}</a></p>
+      </span>
+  		{% endfor %}
+    </div>
+
+  </div>
+
+{% include "footer.html" %}

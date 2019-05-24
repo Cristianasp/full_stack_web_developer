@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+{% include "header.html" %}
+<!-- body tag already open -->
+
+<div class="container_body">
+<div class="columnE"
+
+  		<span class = 'name'>{{item.name}}</span>
+      <p>
+  		<span class = 'description'>{{item.description}}</span>
+      <p>
+      {% if login_session and autho%}
+        <span class = 'description'><p>
+          <a href='{{url_for('editItem', item_name = item.name)}}'>Edit</a>
+          |
+          <a href='{{url_for('deleteItem', item_name = item.name)}}'>Delete</a>
+          </p></span>
+      {% else %}
+          <button class="btn">
+          <a href = '{{url_for('showCategories')}}'>OK</button>
+      {% endif %}
+  </div>
+</div>
+
+{% include "footer.html" %}

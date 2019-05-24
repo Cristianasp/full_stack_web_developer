@@ -1,0 +1,22 @@
+<div class="header">
+  <div class="container_header">
+    <div class="columnE">
+
+<div class = 'flash'>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+
+          {% for message in messages %}
+           {{ message }}
+          {% endfor %}
+
+          {% endif %}
+        {% endwith %}
+</div>
+
+</div>
+</div>
+</div>
+
+</body>
+</html>

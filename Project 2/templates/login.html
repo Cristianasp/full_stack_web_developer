@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+ <title>Catalog APP</title>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <!-- get the required files from google -->
+ <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+ <!-- stylesheet -->
+ <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+ <!--LOAD PRE-REQUISITES FOR GOOGLE SIGN IN -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+      <script src="https://apis.google.com/js/client:platform.js?onload=start" async defer></script>
+     <script>
+       function start() {
+         gapi.load('auth2', function() {
+           auth2 = gapi.auth2.init({
+             client_id: 'YOUR_SECRET_HERE.apps.googleusercontent.com'
+           });
+         });
+       }
+     </script>
+ <!-- END PRE-REQUISITES FOR GOOGLE SIGN IN -->
+
+
+</head>
+
+<body>
+ {% if name %}
+  <div class='usuario'>
+  <img class="avatar" src={{foto}}></img> Logged as: {{name}},{{email}}
+ {% endif %}
+
+ <div class="header">
+    <div class="container_header">
+      <div class="columnA">Catalog APP</div>
+      <div class="columnB">Login</div>
+    </div>
+ </div>
+
+<div class="container_body">
+<div class="columnE">
+
+  <!-- GOOGLE SIGN IN-->
+    <div class="name">
+      <p>Please sign in with your Google Account</p><br>
+    </div>
+    <button id="signinButton">Google Signin</button>
+    <div id="result"></div>
+    <script>
+      $('#signinButton').click(function() {
+        function signInCallback(authResult){
+          console.log('I am here');
+          if (authResult['code']){
+            $('#signinButton').attr('style', 'display: none');
+            $.ajax({
+              type: 'POST',
+              url: '/gconnect?state={{STATE}}',
+              headers: {
+              'X-Requested-With': 'XMLHttpRequest'
+              },
+              contentType: 'application/octet-stream; charset=utf-8',
+              success:function(result){
+                $('#result').html('Login Successful!</br>'+ result + '</br>Redirecting...')
+                     setTimeout(function() {
+                      window.location.href = "/";
+                     }, 2000);
+              },
+              processData:false,
+              data:authResult['code']
+            });
+          } else{
+            // handle error
+            console.log('There was an error: ' + authResult['error']);
+            $('#result').html('Failed to make a server-side call. Check your configuration and console.');
+          }
+        }
+        auth2.grantOfflineAccess().then(signInCallback);
+      });
+    </script>
+  <!--END GOOGLE SIGN IN -->
+</div>
+<div class="columnE">
+  <!--FACEBOOK SIGN IN -->
+    <script>
+      window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '1060682897451676',
+        cookie     : true,  // enable cookies to allow the server to access
+                            // the session
+        xfbml      : true,  // parse social plugins on this page
+        version    : 'v3.2' // use version 2.2
+      });
+      };
+
+      // Load the SDK asynchronously
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+
+      // Here we run a very simple test of the Graph API after login is
+      // successful.  See statusChangeCallback() for when this call is made.
+      function sendTokenToServer() {
+        var access_token = FB.getAuthResponse()['accessToken'];
+        console.log(access_token)
+        console.log('Welcome!  Fetching your information.... ');
+        FB.api('/me', function(response) {
+          console.log('Successful login for: ' + response.name);
+         $.ajax({
+          type: 'POST',
+          url: '/fbconnect?state={{STATE}}',
+          processData: false,
+          data: access_token,
+          contentType: 'application/octet-stream; charset=utf-8',
+          success: function(result) {
+            // Handle or verify the server response if necessary.
+            if (result) {
+              $('#result').html('Login Successful!</br>'+ result + '</br>Redirecting...')
+             setTimeout(function() {
+              window.location.href = "/";
+             }, 4000);
+          } else {
+            $('#result').html('Failed to make a server-side call. Check your configuration and console.');
+             }
+          }
+      });
+        });
+      }
+    </script>
+    <div class="name">
+    <p>Please sign in with your Facebook Account</p><br>
+  </div>
+    <button>
+    <fb:login-button scope="public_profile,email" onlogin="sendTokenToServer();">
+    <a href='javascript:sendTokenToServer()'>Login with Facebook</a>
+    </fb:login-button>
+    </button>
+  <!--END FACEBOOK SIGN IN -->
+
+</div>
+</div>
+
+{% include "footer.html" %}
